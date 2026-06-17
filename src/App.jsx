@@ -91,7 +91,7 @@ function Layout({ content, children }) {
     <>
       <header className="site-header">
         <Link to="/" className="brand" onClick={close} aria-label={`${content.brand.name} home`}>
-          <span>{content.brand.shortName}</span>
+          {content.brand.logo ? <img src={content.brand.logo} alt="" /> : <span>{content.brand.shortName}</span>}
           <strong>{content.brand.name}</strong>
         </Link>
         <button className="icon-button menu-button" type="button" onClick={() => setOpen((value) => !value)} aria-label="Toggle menu">
@@ -120,7 +120,7 @@ function Footer({ content }) {
     <footer className="footer">
       <div>
         <p className="eyebrow">{content.brand.tagline}</p>
-        <h2>One accountable team for planning, execution, interiors, and finishing.</h2>
+        <h2>Interior designing, decorating, custom furniture, planning, and furnishing.</h2>
       </div>
       <div className="footer-grid">
         <div>
@@ -142,7 +142,7 @@ function HomePage({ content }) {
     <Layout content={content}>
       <Seo content={content} />
       <section className="hero">
-        <video src={heroVideo} autoPlay muted loop playsInline />
+        {heroVideo ? <video src={heroVideo} autoPlay muted loop playsInline /> : <img className="hero-media" src={content.hero.image} alt="" />}
         <div className="hero-shade" />
         <div className="hero-copy reveal">
           <p className="eyebrow">{content.hero.eyebrow}</p>
@@ -173,11 +173,9 @@ function HomePage({ content }) {
           <h2>Built to replace WordPress with structured content, faster pages, and cleaner campaign tracking.</h2>
         </div>
         <div className="intro-panel">
-          <p>
-            This React build separates content from layout so WordPress pages, testimonials, team details, services, project images, and SEO fields can be imported into one editable model.
-          </p>
+          <p>{content.brand.description}</p>
           <div className="check-list">
-            {["WordPress export ready", "Admin JSON editor", "SEO metadata hooks", "Hostinger static deployment"].map((item) => (
+            {["WordPress content imported", "TBHD logo downloaded", "Portfolio media mapped", "Admin JSON editor"].map((item) => (
               <span key={item}><Check size={16} /> {item}</span>
             ))}
           </div>
@@ -195,7 +193,7 @@ function HomePage({ content }) {
 function ServicePreview({ content }) {
   return (
     <section className="section">
-      <SectionHeading eyebrow="Services" title="Construction and interiors handled as one connected workflow." link="/services" linkText="All Services" />
+      <SectionHeading eyebrow="Services" title="Everything needed to shape a complete home interior." link="/services" linkText="All Services" />
       <div className="service-grid">
         {content.services.map((service, index) => (
           <article className="service-card" key={service.title} style={{ "--delay": `${index * 80}ms` }}>
@@ -237,7 +235,7 @@ function ProcessSection({ content }) {
 function ProjectPreview({ content }) {
   return (
     <section className="section">
-      <SectionHeading eyebrow="Projects" title="Representative construction, interior, renovation, and commercial work." link="/projects" linkText="View Projects" />
+      <SectionHeading eyebrow="Projects" title="Portfolio entries migrated from the current WordPress website." link="/projects" linkText="View Projects" />
       <ProjectGrid projects={content.projects.slice(0, 4)} />
     </section>
   );
@@ -248,7 +246,7 @@ function Testimonials({ content }) {
     <section className="section testimonials">
       <div>
         <p className="eyebrow">Client Voice</p>
-        <h2>What customers should feel at every stage: clarity, control, and confidence.</h2>
+        <h2>Client feedback from the current WordPress website.</h2>
       </div>
       <div className="testimonial-grid">
         {content.testimonials.map((item) => (
@@ -266,7 +264,7 @@ function ServicesPage({ content }) {
   return (
     <Layout content={content}>
       <Seo content={content} title="Services" />
-      <PageHero eyebrow="Services" title="Plan, build, renovate, and furnish with one team." />
+      <PageHero eyebrow="Services" title="Interior designing, decorating, custom furniture, and furnishing." />
       <section className="section service-detail-grid">
         {content.services.map((service) => (
           <article key={service.title} className="service-detail">
@@ -303,7 +301,7 @@ function ProjectsPage({ content }) {
   return (
     <Layout content={content}>
       <Seo content={content} title="Projects" />
-      <PageHero eyebrow="Projects" title="A portfolio structure ready for real WordPress project imports." />
+      <PageHero eyebrow="Projects" title="Portfolio migrated from the live WordPress website." />
       <section className="section">
         <div className="work-controls">
           <div className="tabs" aria-label="Project categories">
@@ -369,9 +367,7 @@ function ProjectDetailPage({ content }) {
       <section className="project-detail-layout">
         <article className="project-story">
           <h2>{project.summary}</h2>
-          <p>
-            This detail page is connected to the content model and can be populated from the current WordPress project pages once the server export is available.
-          </p>
+          <p>This project page is generated from the TBHD content model and uses media downloaded from the current WordPress website.</p>
           <div className="image-stack">
             {project.gallery.map((image, index) => (
               <img src={image} alt={`${project.title} view ${index + 1}`} key={image} />
@@ -400,7 +396,7 @@ function AboutPage({ content }) {
   return (
     <Layout content={content}>
       <Seo content={content} title="About" />
-      <PageHero eyebrow="About" title="A design-build website for AP and Telangana customers." />
+      <PageHero eyebrow="About" title="The story of our journey." />
       <section className="section about-grid">
         <div>
           <p className="eyebrow">Company</p>
@@ -408,9 +404,7 @@ function AboutPage({ content }) {
         </div>
         <div>
           <p>{content.brand.description}</p>
-          <p>
-            The custom build is prepared for WordPress migration: pages, services, team members, testimonials, FAQs, project galleries, contact details, and SEO fields have dedicated structured homes.
-          </p>
+          <p>We have worked with renowned names. From hotels, offices and personal homes, we have worked with clients from all backgrounds.</p>
         </div>
       </section>
       <section className="section team">
@@ -447,7 +441,7 @@ function ContactPage({ content }) {
       <section className="contact section page-offset">
         <div>
           <p className="eyebrow">Contact</p>
-          <h1>Start a site visit or design discussion.</h1>
+          <h1>Have questions? Reach out to us.</h1>
           <div className="contact-list">
             <a href={`mailto:${content.brand.email}`}><Mail size={18} /> {content.brand.email}</a>
             <a href={`tel:${content.brand.phone.replaceAll(" ", "")}`}><Phone size={18} /> {content.brand.phone}</a>

@@ -155,6 +155,12 @@ p {
   font-size: 0.8rem;
 }
 
+.brand img {
+  width: 116px;
+  height: auto;
+  object-fit: contain;
+}
+
 .brand strong {
   max-width: 190px;
   overflow: hidden;
@@ -216,9 +222,21 @@ p {
 }
 
 .hero video,
+.hero-media,
+.hero-blueprint,
 .hero-shade {
   position: absolute;
   inset: 0;
+}
+
+.hero-blueprint {
+  background:
+    radial-gradient(circle at 72% 22%, rgba(199, 149, 67, 0.28), transparent 28%),
+    linear-gradient(135deg, rgba(80, 96, 106, 0.92), rgba(23, 19, 15, 0.96)),
+    linear-gradient(90deg, rgba(255, 250, 240, 0.14) 1px, transparent 1px),
+    linear-gradient(rgba(255, 250, 240, 0.12) 1px, transparent 1px);
+  background-size: auto, auto, 52px 52px, 52px 52px;
+  animation: blueprintShift 18s linear infinite;
 }
 
 .hero-shade {
