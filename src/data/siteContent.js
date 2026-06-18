@@ -18,8 +18,9 @@ import villa54A from "../../assets/tbhd/The-Best-Home-Design-Villa-54-1-scaled.j
 import villa54B from "../../assets/tbhd/The-Best-Home-Design-Villa-54-2.jpg";
 import villa55A from "../../assets/tbhd/The-Best-Home-Design-Villa-55-1-scaled.jpg";
 import villa44A from "../../assets/tbhd/The-Best-Home-Design-Villa-44-1.jpg";
+import homeHeroVideo from "../../assets/tbhd/TBHD HOME HERO V1.MP4";
 
-export const heroVideo = "";
+export const heroVideo = homeHeroVideo;
 
 const testimonialQuote =
   "I absolutely loved their design and their products. Their work speaks for themselves. This is the best design team any business can ask for. They are reliable, provide amazingly quick service and will listen carefully to their clients. I would definitely recommend them to all of my coworkers and friends.";
